@@ -30,7 +30,7 @@ $(document).ready(function() {
             }
         });
         $('.step2').slideUp();
-        $('.tableData').slideDown();
+        $('.tableData').slideDown().css({ 'top': '50%', 'transform': 'translateY(-50%)' });
         renderMap(markers);
     });
 

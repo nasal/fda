@@ -28,7 +28,7 @@ function renderMap(markers) {
     });
 
     setTimeout(function() {
-        $('.tableData').animate({ 'top': '85%' });
+        $('.tableData').animate({ 'top': '85%' }).css('transform', '');
         $('.hideData').text('show');
     }, 2000);
 }
