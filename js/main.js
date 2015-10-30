@@ -4,6 +4,8 @@ $(document).ready(function() {
     $('#submitData').click(function(e) {
         e.preventDefault();
         var delimiter = $('#csvDelimiter option:selected').attr('value');
+        $('.step1').slideUp();
+        $('.step2').slideDown();
         readCsv(delimiter);
     });
 
@@ -16,7 +18,8 @@ $(document).ready(function() {
     $('#renderMap').click(function(e) {
         e.preventDefault();
         var markers = [];
-        $('#dataTable tbody tr').each(function(i, v) {
+        var dt = $('#dataTable').dataTable();
+        $(dt.fnGetNodes()).each(function(i, v) {
             var tr = $(this);
             if (tr.hasClass('displayMarker')) {
                 var lat = tr.find('td')[$('#latitude option:selected').attr('value')];
@@ -26,7 +29,20 @@ $(document).ready(function() {
                 markers.push(marker);
             }
         });
+        $('.step2').slideUp();
+        $('.tableData').slideDown();
         renderMap(markers);
+    });
+
+    $(document).on('click', '.hideData', function(e) {
+        e.preventDefault();
+        if ($(this).text() == 'hide') {
+            $('.tableData').animate({ 'top': '85%' }).css('transform', '');
+            $('.hideData').text('show');
+        } else {
+            $('.tableData').animate({ 'top': '50%' }).css('transform', 'translateY(-50%)');
+            $('.hideData').text('hide');
+        }
     });
 
     // Loop over TDs and replace image links with image elements.
